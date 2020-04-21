@@ -1,0 +1,23 @@
+version: '3'
+services:
+  website:
+    image: php:apache
+    container_name: website
+    ports:
+      - 3000:3000
+    volumes:
+      - ./website:/var/www/html
+    environment:
+      USERNAME: dima
+      PASSWORD: 1234
+    restart: always
+    depends_on:
+      - api
+  api:
+    image: .
+    container_name: api
+    ports:
+      - 5000:5000
+    restart: always
+    volumes:
+        - ./student_age.json:/data/student_age.json
